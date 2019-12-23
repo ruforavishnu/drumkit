@@ -74,38 +74,45 @@
 
 
 	<script>
-		window.addEventListener('keydown', function(e)
-		{
-			// console.log(e.keyCode);
+
+	function playSound(e)
+	{
 			const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
 			if(!audio)
 				return null;
 
 			const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
-			console.log(key);
+//			console.log("inside keydown listener, key="+key);
 
 			key.classList.add('playing');
 			
 			audio.currentTime = 0;
 			audio.play();
 
+	}
+		
 
 
 
-		});
+		
 			function removeTransition(e)
 			{
-				if(e.propertyName!=='transform');
+				//console.log("inside removeTransition function")
+				//console.log(e);
+
+				if(e.propertyName!=='transform')
 				return;
 
-				console.log("this is the property name"+e.propertyName);
+				this.classList.remove('playing');
+				console.log("transform");
+								//console.log("this is the property name"+e.propertyName);
 			}
 
 			const keys = document.querySelectorAll('.key');
 			keys.forEach(key => key.addEventListener('transitionend', removeTransition));
-			console.log("keys:"+keys);
-			//console.log("key:"+key);
-
+			window.addEventListener('keydown', playSound);
+			//console.log("keys:"+keys);
+			
 	</script>				
 </body>
 </html>

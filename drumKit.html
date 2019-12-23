@@ -82,36 +82,25 @@
 				return null;
 
 			const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
-//			console.log("inside keydown listener, key="+key);
-
 			key.classList.add('playing');
-			
 			audio.currentTime = 0;
 			audio.play();
 
 	}
 		
+	
+	function removeTransition(e)
+	{
+		if(e.propertyName!=='transform')
+		return;
 
+		this.classList.remove('playing');
+		console.log("transform");
+	}
 
-
-		
-			function removeTransition(e)
-			{
-				//console.log("inside removeTransition function")
-				//console.log(e);
-
-				if(e.propertyName!=='transform')
-				return;
-
-				this.classList.remove('playing');
-				console.log("transform");
-								//console.log("this is the property name"+e.propertyName);
-			}
-
-			const keys = document.querySelectorAll('.key');
-			keys.forEach(key => key.addEventListener('transitionend', removeTransition));
-			window.addEventListener('keydown', playSound);
-			//console.log("keys:"+keys);
+	const keys = document.querySelectorAll('.key');
+	keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+	window.addEventListener('keydown', playSound);
 			
 	</script>				
 </body>
